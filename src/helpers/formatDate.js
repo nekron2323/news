@@ -5,5 +5,5 @@ export const formatDate = (date) => {
         month: 'long',
         day: 'numeric'
     }
-    return date.toLocaleDateString('en-EN', options)
+    return date.toLocaleDateString('ru-RU', options)
 }
