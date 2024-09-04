@@ -14,7 +14,7 @@ const Main = () => {
             try {
                 setIsLoading(true)
                 setNews(await getNews())
-                // setIsLoading(false)     
+                setIsLoading(false)     
                            
             } catch (error) {
                 console.log(error)
