@@ -1,4 +1,4 @@
-import NewsItem from '../Temp/NewsItem'
+import NewsItem from '../NewsItem/NewsItem'
 import styles from './styles.module.css'
 
 const NewList = ({ news }) => {
