@@ -6,22 +6,28 @@ import NewList from '../../cmp/NewList/NewList'
 import Skeleton from '../../cmp/Skeleton/Skeleton'
 import Pagination from '../../cmp/Pagination/Pagination'
 import Categories from '../../cmp/Categories/Categories'
+import Search from '../../cmp/Search/Search'
+import { useDebounce } from '../../helpers/hooks/useDebounce'
 
 const Main = () => {
     const [news, setNews] = useState([])
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('All')
+    const [keywords, setKeywords] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
     const totalPages = 10
     const pageSize = 10
+    const debouncedKeywords = useDebounce(keywords, 1500)
+
     const fetchNews = async (currentPage) => {
         try {
             setIsLoading(true)
             setNews(await getNews({
                 page_number: currentPage,
                 page_size: pageSize,
-                category: selectedCategory === 'All' ? null : selectedCategory
+                category: selectedCategory === 'All' ? null : selectedCategory,
+                keywords: debouncedKeywords
             }))
             setIsLoading(false)
 
@@ -38,7 +44,7 @@ const Main = () => {
     }
     useEffect(_ => {
         fetchNews(currentPage)
-    }, [currentPage, selectedCategory])
+    }, [currentPage, selectedCategory, debouncedKeywords])
 
     useEffect(_ => {
         fetchCategories()
@@ -62,6 +68,7 @@ const Main = () => {
                 categories={categories}
                 setSelectedCategory={setSelectedCategory}
                 selectedCategory={selectedCategory} />
+            <Search keywords={keywords} setKeywords={setKeywords} />
             {news?.length && !isLoading ? <NewsBanner item={news[0]} /> : <Skeleton type='banner' />}
             <Pagination
                 totalPages={totalPages}
