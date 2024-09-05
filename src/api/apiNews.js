@@ -32,3 +32,16 @@ export const getCategories = async () => {
         console.log(error)
     }
 }
+
+export const getLatestNews = async () => {
+    try {
+        const res = await axios.get(`${BASE_URL}latest-news`, {
+            params: {
+                apiKey: API_KEY
+            }
+        })
+        return res.data?.news
+    } catch (error) {
+        console.log(error)
+    }
+}
