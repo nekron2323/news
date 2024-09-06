@@ -1,1 +1,5 @@
-# React + Vite
+# Vite
+# React
+# TypeScript
+# Redux
+
