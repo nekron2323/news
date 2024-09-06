@@ -8,10 +8,8 @@ import { getNews } from "../../api/apiNews";
 import { useFilters } from "../../helpers/hooks/useFilters";
 import PaginationWrapper from "../PaginationWrapper/PaginationWrapper";
 import { NewsApiResponse, ParamsType } from "@/interfaces";
-import { useTheme } from "../../context/ThemeContext";
 
 const NewsByFilters = () => {
-  const { isDark } = useTheme()
   const { filters, changeFilters } = useFilters({
     page_number: 1,
     page_size: PAGE_SIZE,
