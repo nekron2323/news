@@ -1,7 +1,7 @@
 import { IPaginationProps } from '@/interfaces'
 import Pagination from '../Pagination/Pagination'
 
-interface Props{
+interface Props {
     top?: boolean
     bottom?: boolean
     children: React.ReactNode
