@@ -1,32 +1,41 @@
 import styles from './styles.module.css'
-import { getCategories } from '../../api/apiNews'
-import { useFetch } from '../../helpers/hooks/useFetch'
 import Categories from '../Categories/Categories'
 import Search from '../Search/Search'
 import Slider from '../Slider/Slider'
-import { CatigoriesApiResponse, IFilters } from '@/interfaces'
+import { useGetCategoriesQuery } from '../../store/services/newsApi'
+import { IFilters } from '@/interfaces'
+import { setFilters } from '../../store/slices/newsSlice'
+import { useAppDispatch } from '../../store'
 
 interface Props {
     filters: IFilters
-    changeFilters: (key: string, value: string | number | null) => void
 }
 
-const NewsFilters = ({ filters, changeFilters }: Props) => {
-    const { data: dataCategories } = useFetch<CatigoriesApiResponse, null>(getCategories)
+const NewsFilters = ({ filters }: Props) => {
+    const dispatch = useAppDispatch()
+    const { data } = useGetCategoriesQuery(null)
     return (
         <div className={styles.filters}>
-            {dataCategories?.categories?.length &&
+            {data?.categories?.length &&
                 <Slider >
                     <Categories
-                        categories={dataCategories?.categories}
-                        setSelectedCategory={(category) => changeFilters('category', category)}
+                        categories={data?.categories}
+                        setSelectedCategory={(category) => dispatch(
+                            setFilters({
+                                key: 'category',
+                                value: category
+                            }))}
                         selectedCategory={filters.category}
                     />
                 </Slider>
             }
             <Search
                 keywords={filters.keywords}
-                setKeywords={(keywords) => changeFilters('keywords', keywords)} />
+                setKeywords={(keywords) => dispatch(
+                    setFilters({
+                        key: 'keywords',
+                        value: keywords
+                    }))} />
         </div>
     )
 }
