@@ -4,15 +4,21 @@ import { useFetch } from '../../helpers/hooks/useFetch'
 import Categories from '../Categories/Categories'
 import Search from '../Search/Search'
 import Slider from '../Slider/Slider'
+import { CatigoriesApiResponse, IFilters } from '@/interfaces'
 
-const NewsFilters = ({ filters, changeFilters }) => {
-    const { data: dataCategories } = useFetch(getCategories)
+interface Props {
+    filters: IFilters
+    changeFilters: (key: string, value: string | number | null) => void
+}
+
+const NewsFilters = ({ filters, changeFilters }: Props) => {
+    const { data: dataCategories } = useFetch<CatigoriesApiResponse, null>(getCategories)
     return (
         <div className={styles.filters}>
-            {dataCategories?.length &&
+            {dataCategories?.categories?.length &&
                 <Slider>
                     <Categories
-                        categories={dataCategories}
+                        categories={dataCategories?.categories}
                         setSelectedCategory={(category) => changeFilters('category', category)}
                         selectedCategory={filters.category} />
                 </Slider>
