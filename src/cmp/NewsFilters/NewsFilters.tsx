@@ -16,11 +16,12 @@ const NewsFilters = ({ filters, changeFilters }: Props) => {
     return (
         <div className={styles.filters}>
             {dataCategories?.categories?.length &&
-                <Slider>
+                <Slider >
                     <Categories
                         categories={dataCategories?.categories}
                         setSelectedCategory={(category) => changeFilters('category', category)}
-                        selectedCategory={filters.category} />
+                        selectedCategory={filters.category}
+                    />
                 </Slider>
             }
             <Search

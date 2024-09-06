@@ -1,3 +1,4 @@
+import { useTheme } from '../../context/ThemeContext'
 import styles from './styles.module.css'
 
 interface Props {
@@ -6,14 +7,15 @@ interface Props {
 }
 
 const Search = ({ keywords, setKeywords }: Props) => {
+    const { isDark } = useTheme()
     return (
-        <div className={styles.search}>
+        <div className={`${styles.search} ${isDark ? styles.dark : styles.light}`}>
             <input
                 type='text'
                 value={keywords}
                 onChange={e => setKeywords(e.target.value)}
-                className={styles.input} 
-                placeholder='Input keyword'/>
+                className={styles.input}
+                placeholder='Input keyword' />
         </div>
     )
 }
