@@ -9,14 +9,11 @@
 .pageNumber,
 .arrow {
     border: none;
-    background-color: white;
+    background-color: red;
     cursor: pointer;
 }
 
-.pageNumber:disabled,
-.arrow:disabled {
-    cursor: default;
-}
+
 
 .pagination.dark .pageNumber,
 .pagination.dark .arrow {
@@ -28,6 +25,18 @@
 .pagination.light .arrow {
     background-color: white;
     color: black;
+}
+
+.pagination.light .pageNumber:disabled,
+.pagination.light .arrow:disabled {
+    cursor: default;
+    color: grey;
+}
+
+.pagination.dark .pageNumber:disabled,
+.pagination.dark .arrow:disabled {
+    cursor: default;
+    color: grey;
 }
 
 .pageNumber {

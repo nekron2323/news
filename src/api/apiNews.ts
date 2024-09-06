@@ -1,4 +1,4 @@
-import { CatigoriesApiResponse, INews, ParamsType } from "@/interfaces"
+import { CategoriesApiResponse, INews, ParamsType } from "@/interfaces"
 import axios from "axios"
 
 const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL
@@ -39,7 +39,7 @@ export const getNews = async (params?: ParamsType): Promise<NewsApiResponse> => 
     }
 }
 
-export const getCategories = async (): Promise<CatigoriesApiResponse> => {
+export const getCategories = async (): Promise<CategoriesApiResponse> => {
     try {
         const res = await axios.get(`${BASE_URL}available/categories`, {
             params: {
